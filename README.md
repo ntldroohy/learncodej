@@ -48,4 +48,50 @@ var version="3.1.1",
        return letter.toUpperCase();
      }
      
-     jQuery.fn=jQuery.prototype={}
+     jQuery.fn=jQuery.prototype={
+          jquery:version,
+          constructor:jQuery,
+          length:0,
+          toArray:function(){
+             return slice.call(this);
+          }
+     }
+     
+     get:function(num){
+        if(num == null){
+            return slice.call(this);
+        }
+        return num<0?this[num+this.length]:this[num];
+     },
+     pushStack:function(elems){
+        var ret = jQuery.merge(this.constructor(),elems);
+        ret.pervObject = this;
+        return ret;
+     },
+     each:function( callback ) {
+         return jQuery.each( this, callback );
+     },
+     map: function( callback ) {
+        return this.pushStack( jQuery.map( this, function( elem,i ) {
+           return callback.call( elem, i, elem);
+        }))
+     },
+     
+     slice:function() {
+          return this.pushStack( slice.apply( this, arguments ) );
+     },
+     first: function() {
+        return this.eq(0);
+     },
+     last:function() {
+        return this.eq(-1);
+     },
+     eq: function() {
+          var len=this.length,
+              j=+i+(i<0?len:0);
+              return this pushStack( j >= 0 && j<len ? [ this[ j ] ]: [] ) ;
+    },
+    
+    end: function() {
+       return this.provOject || this.constructor() ;
+    }
