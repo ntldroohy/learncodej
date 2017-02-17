@@ -54,10 +54,8 @@ var version="3.1.1",
           length:0,
           toArray:function(){
              return slice.call(this);
-          }
-     }
-     
-     get:function(num){
+          },
+            get:function(num){
         if(num == null){
             return slice.call(this);
         }
@@ -94,4 +92,98 @@ var version="3.1.1",
     
     end: function() {
        return this.provOject || this.constructor() ;
-    }
+    },
+    push:push,
+    sort:arr.sort,
+    splice:arr.splice
+
+  }
+  
+jQuery.extend=jQuery.fn.extend=function() {
+  var options, name, src, copy, copyIsArray, clone,
+      target = arguments[ 0 ] || {},
+      i = 1,
+      length = arguments.length,
+      deep = false;
+      
+      if ( typeof target === "boolean" ) {
+         deep = target;
+         target = arguments[ i ] || {} ;
+         i++
+      }
+      if ( typeof target !== "object" && !jQuery.isFunction( target )) {
+          target =  {};  
+       }
+       if ( i=== length ) {
+          target = this;
+          i--;
+       }
+       for ( ;i < length; i++ ) {
+          if ( ( options = arguments[ i ] ) != null ) {
+             for ( name in options ) {
+                src = target[ name ];
+                copy = options[ name ];
+                 if ( target === copy) {
+                     continue;
+                 }
+                 
+                 if ( deep && copy && ( jQuery.isPlainObject( copy) || ( copyIsArray = jQuery.isArray( copy )))) {
+                     if ( copyIsArray ){
+                        copyIsArray = false;
+                        clone = src && jQuery.isPlainObject( src ) ? src : [] ;
+                     } else {
+                       clone = src && jQuery.isArray( src ) ? src : [];
+                      }
+                      target[ name ] = jQuery.extend( deep, clone,copy );
+                 } else if ( copy != undefined ) {
+                    target[ name ] = copy;
+                 }
+             }
+          }
+       }
+       
+       return target;
+};
+
+jQuery.extend( {
+    expando: "jQuery" + ( version + Math.random() ).replace( /\D/g, ""),
+    isReady:true,
+    error: function( msg ) {
+       throw new Error( msg );
+    },
+    noop: function() {},
+    isFunction: function( obj ) {
+        return jQuery.type( obj )  === "function";
+    },
+    isArray: Array.isArray,
+    isWindow: function( obj ){
+       return obj !=null && obj === obj.window;
+    },
+    isNumeric: function( obj ){
+        var type = jQuery.type( obj );
+        return ( type === "number" || type === "String" ) && !isNan( obj - parseFloat( obj ) );
+    },
+    isPlainObject: function( obj ) {
+       var proto, Ctor;
+       if ( !obj || toString.call( obj ) !== "[object Object]") {
+           return false;
+       }
+       proto = getProto( obj );
+       
+       if ( !proto ) {
+           return true;
+       }
+       ctor = hasOwn.call( proto, "constructor" ) && proto.constructor;
+       return typeof Ctor === "function" && fnToString.call( Ctor ) === ObjectFunctonString;
+    },
+    
+    isEmtyObject: function( obj ) {
+        var name;
+        
+        for( name in obj) {
+            return false;
+        }
+        return true;
+    },
+})
+   
