@@ -185,5 +185,225 @@ jQuery.extend( {
         }
         return true;
     },
-})
+    type: function( obj ) {
+         if ( obj == null ) {
+             return obj + "";
+         }
+         
+         return typeof obj === "object" || typeof obj === "function" ? class2type[ toString.call( obj )] || "object" : typeof obj;
+    },
+    
+    globalEval: function( code ) {
+         DOMEvAL( code ) {
+              DOMEval( code );
+         }
+    },
+    
+    camelCase: function( string ) {
+        return string.replace( rmsPrefix, "ms-").replace( rdashAlpha, fcamelCase );
+    },
+    nodeName: function( elem, name ) {
+        return elem.nodeName && elem.nodeName.toLowerCase() === name.toLowerCase();
+    },
+    each: function( obj, callback ) {
+        var length, i=0;
+        
+        if ( isArrayLike( obj ) ) {
+             length = obj.length;
+             for (; i < length; i++) {
+                 if ( callback.call( obj[i], i, obj[i]) === false ) {
+                    break;
+                 }
+             }
+        } else {
+             for( i in obj ) {
+                 if ( callback.call( obj[ i ], i, obj[ i ]) ===false) {
+                       break;
+                 }
+             }
+        }
+        
+        return obj;
+    },
+    
+    trim: function( text ) {
+        return text == null ? "": ( text + "").replace( rtrim, "");
+    },
+    
+    makeArray: function( arr, results ) {
+         var ret = results || [];
+         if ( arr != null ) {
+                if( isArrayLike( Object( arr ))) {
+                    jQuery.merge( ret, typeof arr === "string"? [ arr ]:arr); 
+                } else {
+                    push.call( ret,arr );
+                }
+         }
+         return ret;
+    },
+    inArray: function( elem, arr , i) {
+       return arr == null? -1 : indexOf.call( arr,elem,i);
+    },
+    
+    merge: function( first, second ) {
+         var len = +second.length,
+         j = 0,
+         i = first.length;
+         
+         for( ; j < len; j++) {
+            first[ i++ ] = seconde[ j ];
+         }
+         
+         first.length = i;
+         return first;
+    },
+    
+    grep: function: function( elems, callbak, invert ) {
+          var callbakInverse,
+              matches = [],
+              i = 0,
+              length = elems.length,
+              callbackExpect = !invert;
+              
+              for ( ; i < length; i++) {
+                   callbakInverse = !callback( elems[ i ], i );
+                   if ( callbackInverse !== callbackExpect ) {
+                        matches.push( elems[ i ] );
+                   }
+              }
+              return matches;
+    },
+    
+    map: function( elems, callback, arg ) {
+        var length, value,
+            i = 0,
+            ret = [];
+            
+            if ( isArrayLike( elems ) ) {
+                length = elems.length;
+                for ( ; i < length; i++) {
+                     value = callback( elems[ i ], i, arg);
+                     
+                     if( value != null) {
+                        ret.push( value );
+                     }
+                }
+            }else {
+                 if( i in elems ) {
+                     value = callback( elems[ i ], i, arg );
+                     
+                     if( value != null ) {
+                          ret.push( value );
+                     }
+                 }
+            }
+            return cancat.apply( [], ret );
+    },
+    
+    guid: 1,
+    
+    proxy: function( fn, context ) {
+         var tmp, args, proxy;
+         
+         if ( typeof context === "string") {
+             temp = fn[ context ];
+             context = fn;
+             fn = tmp;
+         }
+         
+        if( !jQuery.isFunction( fn ) ) {
+             return undefined;
+           }
+        args = slice.call( arguments,2 );
+         proxy = function() {
+              return fn.apply( context || this , args.concat( slice.call( arguments ) ) );
+         };
+         proxy.guid = fun.guid = fun.guid || jQuery.guid++;
+         return proxy:
+    },
+    now: Date.now,
+    support: support
+});
+   
+   if ( typeof Symbol === "function" ) {
+       jQuery.fn[ Symbol.iterator ] = arr[ Symbol.iterator ];
+   }
+   
+   jQuery.each( "Boolean Number String Function Array Date RegExp Object Error Symbol " ).split( "" ),
+   function( i, name ) {
+        class2type[ "[object "+name+ "]" ] = name.toLowerCase();
+   });
+   
+   function isArrayLike( obj ) {
+           var length = !!obj && "length" in obj && obj.length,
+               type = jQuery.type( obj );
+               
+               if( type === "function" || jQuery.isWindwo( obj ) ) {
+                    return false;
+               }
+               return type === "array" || length ===0 || typeof length === "number" && length > 0 && ( length-1 ) in obj;
+   }
+   var Sizzle =
+   (function( window ) {
+       var i,
+           support,
+           Expr,
+           getText,
+           isXML,
+           tokenize,
+           compile,
+           select,
+           outermostContext,
+           sortInput,
+           hasDuplicate,
+           setDocument,
+           docElem,
+           documentIsHTML,
+           rbuggyQSQ,
+           rbuggyMatches,
+           matches,
+           contains,
+           expando = "sizzle" + 1 * new Date(),
+           preferredDoc = window.document,
+           dirruns = 0,
+           classCache = createCache(),
+           tokenCache = createCache(),
+           comilerCache = createCache(),
+           sortOrder = function( a,b ) {
+               if ( a===b ) {
+                  hasDuplicate = true;
+               }
+               return 0;
+           },
+           hasOwn = ({}).hasOwnProperty,
+           arr = [],
+           pop = arr.push,
+           push = arr.push,
+           slice = arr.slice,
+           
+           indexOf = function( list, elem ) {
+                var i = 0,
+                    len = list.length;
+                    for( ; i<len; i++ ) {
+                        if ( ; i < len; i++) {
+                              if( list[i] === elem ) {
+                                   return i;
+                              }
+                        }
+                        return -1;
+                    },
+                    booleans = 
+                    "checked|selected|async|autofocus|autoplay|controls|defer|disabled|hidden|ismap|loop|
+                    multiple|open|readonly|required|scoped",
+                    whitespace = "[\\x20\\t\\n\\f]",
+                    identifier = "(?:\\\\.|[\\w-]|[^\0-\\xa0])+",
+                    attrbutes = "\\["+whitespace + "*(" + indentifier + ")(?:" + whitespace + "*([*^$|!~]?=])" + whitespace + 
+                    "*(?:'((?:\\\\.|[^\\\\'])*)'|\"((?:\\\\.|[^\\\\"])*|\"|(" +indentifier + "*(?:'((?:\\\\.|[^\\\\'])'|[^\\\\\"])*)\"|                     ("+ identifier + "))|)" +whitespace + "*\\]",
+                     pseudos = ":(" + identifier + ")(?:\\((" +
+                     "*(?:'((?:\\\\.|[^\\\\'])*)'|\"\\\\\"]"
+                    }
+  })
+   
+   
+   
    
