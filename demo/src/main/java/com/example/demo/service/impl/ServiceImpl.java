@@ -5,4 +5,5 @@ package com.example.demo.service.impl;/**
     @project learncodej
     @version
 */public class ServiceImpl {
+    private  String reset;
 }
