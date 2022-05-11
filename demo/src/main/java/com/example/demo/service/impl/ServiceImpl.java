@@ -6,4 +6,5 @@ package com.example.demo.service.impl;/**
     @version
 */public class ServiceImpl {
     private  String reset;
+    private  String sun;
 }
