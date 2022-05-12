@@ -7,4 +7,5 @@ package com.example.demo.controller;
  * @project learncodej
  */
 public class Controller3 {
+    private String kk;
 }
